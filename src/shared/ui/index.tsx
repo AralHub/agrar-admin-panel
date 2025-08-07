@@ -34,8 +34,8 @@ export const PageLayout = ({
   filter,
 }: {
   title: string;
-  addButton: ReactNode;
-  searchInput: ReactNode;
+  addButton?: ReactNode;
+  searchInput?: ReactNode;
   children: ReactNode;
   filter?: ReactNode;
 }) => {

@@ -2,19 +2,23 @@ import "react-router-dom";
 
 export const ROUTES = {
   ROLE: "/",
+  DEPARTMENT: "/department",
+  PERSONS: "/department/:departmentId",
+  PERSON: "/department/:departmentId/:personId",
   LOGIN: "/login",
-  DEPARTMENT: "/department"
-  // BOARD: "/boards/:boardId",
 } as const;
 
-// export type PathParams = {
-//   [ROUTES.BOARD]: {
-//     boardId: string;
-//   };
-// };
+export type PathParams = {
+  [ROUTES.PERSONS]: {
+    departmentId: string;
+  };
+  [ROUTES.PERSON]: {
+    personId: string;
+  };
+};
 
-// declare module "react-router-dom" {
-//   interface Register {
-//     params: PathParams;
-//   }
-// }
+declare module "react-router-dom" {
+  interface Register {
+    params: PathParams;
+  }
+}

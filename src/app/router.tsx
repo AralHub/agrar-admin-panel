@@ -4,8 +4,8 @@ import { App } from "./app";
 import { Providers } from "./providers";
 import { protectedLoader, ProtectedRoute } from "./protected-route";
 import { AppHeader } from "@/features/header";
-import { Layout } from '@/shared/ui'
-import { Sidebar } from '@/features/sidebar'
+import { Layout } from "@/shared/ui";
+import { Sidebar } from "@/features/sidebar";
 
 export const router = createBrowserRouter([
   {
@@ -33,8 +33,16 @@ export const router = createBrowserRouter([
               },
               {
                 path: ROUTES.DEPARTMENT,
-                lazy: () => import("@/features/department/department.page")
-              }
+                lazy: () => import("@/features/department/department.page"),
+              },
+              {
+                path: ROUTES.PERSONS,
+                lazy: () => import("@/features/person/person.page"),
+              },
+              {
+                path: ROUTES.PERSON,
+                lazy: () => import("@/features/person/person-info.page"),
+              },
             ],
           },
         ],

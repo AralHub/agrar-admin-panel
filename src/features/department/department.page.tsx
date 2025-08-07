@@ -1,9 +1,9 @@
 import { PageLayout } from "@/shared/ui";
 import { DepartmentForm } from "./ui/department-form";
 import { DepartmentFilter } from "./ui/department-filter";
-import { DepartmentPagination } from "./ui/department-pagination";
 import { DepartmentTable } from "./ui/department-table";
 import { useDepartment } from "./model/use-department";
+import { CustomPagination } from '../pagination'
 
 const Department = () => {
   const {
@@ -21,7 +21,6 @@ const Department = () => {
     <PageLayout
       title="Департмент"
       addButton={<DepartmentForm />}
-      searchInput={undefined}
       filter={
         <DepartmentFilter
           roleId={role_id}
@@ -32,7 +31,7 @@ const Department = () => {
       children={
         <>
           <DepartmentTable data={departments} />
-          <DepartmentPagination
+          <CustomPagination
             handleChange={handlePageChange}
             page={page}
             pages={pages}

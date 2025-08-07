@@ -8,14 +8,14 @@ import {
 } from "@/shared/ui/kit/pagination";
 import { FC } from "react";
 
-type DepartmentPagination = {
+type CustomPagination = {
   page: number;
   handleChange: (newPage: number) => void;
   pages: number[];
   totalPages: number;
 };
 
-export const DepartmentPagination: FC<DepartmentPagination> = ({
+export const CustomPagination: FC<CustomPagination> = ({
   handleChange,
   page,
   pages,

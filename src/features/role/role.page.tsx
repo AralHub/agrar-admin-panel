@@ -9,7 +9,6 @@ const RolePage = () => {
     <PageLayout
       title="Роли"
       addButton={<RoleForm />}
-      searchInput={undefined}
       children={<RoleTable data={roles} />}
     />
   );

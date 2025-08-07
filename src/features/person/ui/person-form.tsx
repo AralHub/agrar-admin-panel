@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
-import { useDepartmentCreate } from "../model/use-department-create";
 import { useState } from "react";
 import {
   Dialog,
@@ -23,36 +22,34 @@ import {
 import { Button } from "@/shared/ui/kit/button";
 import { Input } from "@/shared/ui/kit/input";
 import { Plus } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/ui/kit/select";
-import { useRoleList } from "@/features/role";
+import { usePersonCreate } from "../model/use-person-create";
+import { useParams } from "react-router-dom";
+import { PathParams, ROUTES } from "@/shared/model/routes";
 
-const departmentSchema = z.object({
-  name: z.string().min(1, "Название обьязательно"),
-  role_id: z.number().min(1, "Выберите роль"),
+const personSchema = z.object({
+  first_name: z.string().min(1, "Имя обязательно"),
+  last_name: z.string().min(1, "Фамилия обязательна"),
+  image: z.any().optional(),
+  department_id: z.number().min(1, "Выберите отдел"),
 });
 
-export const DepartmentForm = () => {
+export const PersonForm = () => {
   const [open, setOpen] = useState(false);
-  const { roles } = useRoleList();
+  const { departmentId } = useParams<PathParams[typeof ROUTES.PERSONS]>();
   const form = useForm({
-    resolver: zodResolver(departmentSchema),
+    resolver: zodResolver(personSchema),
     defaultValues: {
-      name: "",
-      role_id: undefined,
+      first_name: "",
+      last_name: "",
+      department_id: Number(departmentId),
+      image: undefined,
     },
   });
 
-  const { createDepartment, isPending } = useDepartmentCreate();
+  const { createPerson, isPending } = usePersonCreate();
 
   const onSubmit = form.handleSubmit(async (data) => {
-    const success = await createDepartment(data);
+    const success = await createPerson(data);
     if (success) {
       setOpen(false);
       form.reset();
@@ -69,46 +66,16 @@ export const DepartmentForm = () => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Добавьте роль</DialogTitle>
+          <DialogTitle>Добавьте персонал</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={onSubmit}>
             <FormField
               control={form.control}
-              name="role_id"
+              name="first_name"
               render={({ field }) => (
                 <FormItem className="mt-1 mb-5">
-                  <FormLabel>Название роли</FormLabel>
-                  <FormControl>
-                    <Select
-                      value={field.value ? String(field.value) : ""}
-                      onValueChange={(val) => field.onChange(Number(val))}
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Выберите роль" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          {roles.map((role) => (
-                            <SelectItem key={role.id} value={String(role.id)}>
-                              {role.name}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem className="mt-1 mb-5">
-                  <FormLabel>Название роли</FormLabel>
+                  <FormLabel>Имя</FormLabel>
                   <FormControl>
                     <Input autoComplete={"off"} {...field} />
                   </FormControl>
@@ -116,6 +83,42 @@ export const DepartmentForm = () => {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="last_name"
+              render={({ field }) => (
+                <FormItem className="mt-1 mb-5">
+                  <FormLabel>Фамилия</FormLabel>
+                  <FormControl>
+                    <Input autoComplete={"off"} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="image"
+              render={({ field: { onChange } }) => (
+                <FormItem className="mt-1 mb-5">
+                  <FormLabel>Фотография</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          onChange(file);
+                        }
+                      }}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <DialogFooter>
               <DialogClose asChild>
                 <Button
