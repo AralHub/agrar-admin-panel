@@ -43,7 +43,7 @@ export const PageLayout = ({
     <div className="p-5 flex flex-col gap-5">
       <header className="text-3xl font-medium">{title}</header>
       <div className="flex flex-row justify-between items-center">
-        {addButton}
+        <div>{addButton}</div>
         <div className="flex flex-row items-center w-[300px] relative">
           {searchInput}
         </div>
