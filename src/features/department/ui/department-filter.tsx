@@ -3,7 +3,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/shared/ui/kit/toggle-group";
 import { FC } from "react";
 
 type DepartmentProps = {
-  roleId: number | null;
+  roleId: number | undefined;
   data: ApiSchemas["RoleRead"][];
   onChange: (value: string) => void;
 };

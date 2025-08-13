@@ -2,7 +2,7 @@ import { rqClient } from "@/shared/api/instance";
 import { PaginationParams } from "@/shared/model/types";
 
 export const useDepartmentList = (
-  params: PaginationParams & { role_id: number | null },
+  params: PaginationParams & { role_id: number | undefined },
 ) => {
   const { data, isLoading } = rqClient.useQuery(
     "get",

@@ -18,6 +18,7 @@ const Department = () => {
     role_id,
     totalPages,
     roles,
+    isLoading: dataLoading
   } = useDepartment();
 
   const { link, isReady, showNotification, triggerDownload, isLoading } =
@@ -65,7 +66,7 @@ const Department = () => {
       }
       children={
         <>
-          <DepartmentTable data={departments} />
+          <DepartmentTable data={departments} isLoading={dataLoading}/>
           <CustomPagination
             handleChange={handlePageChange}
             page={page}

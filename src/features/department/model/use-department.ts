@@ -6,8 +6,8 @@ export const useDepartment = () => {
   const [page, setPage] = useState(1);
   const page_size = 10;
   const { roles } = useRoleList();
-  const [role_id, setRoleId] = useState<number | null>(null);
-  const { departments, paginationInfo } = useDepartmentList({
+  const [role_id, setRoleId] = useState<number | undefined>(undefined);
+  const { departments, paginationInfo, isLoading } = useDepartmentList({
     role_id,
     page,
     page_size,
@@ -36,6 +36,7 @@ export const useDepartment = () => {
     totalPages,
     page,
     role_id,
-    roles
+    roles,
+    isLoading
   };
 };

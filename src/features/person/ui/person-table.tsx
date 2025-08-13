@@ -14,12 +14,14 @@ import { Button } from "@/shared/ui/kit/button";
 import { Eye } from "lucide-react";
 import { href, Link, PathParam, useParams } from "react-router-dom";
 import { ROUTES } from "@/shared/model/routes";
+import { Skeleton } from "@/shared/ui/kit/skeleton";
 
 type PersonTable = {
   data: ApiSchemas["PersonRead"][];
+  isLoading: boolean;
 };
 
-export const PersonTable: FC<PersonTable> = ({ data }) => {
+export const PersonTable: FC<PersonTable> = ({ data, isLoading }) => {
   const { departmentId } = useParams<PathParam<typeof ROUTES.PERSON>>();
   return (
     <Table>
@@ -31,6 +33,17 @@ export const PersonTable: FC<PersonTable> = ({ data }) => {
         </TableRow>
       </TableHeader>
       <TableBody>
+        {isLoading &&
+          Array.from({ length: 5 }).map((_, idx) => (
+            <TableRow key={idx}>
+              <TableCell>
+                <Skeleton className="h-[100px] w-[100px] rounded" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-[150px]" />
+              </TableCell>
+            </TableRow>
+          ))}
         {data?.map((item) => (
           <TableRow key={item.id}>
             <TableCell>

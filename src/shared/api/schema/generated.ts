@@ -191,6 +191,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/persons/search/{search}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Search Persons */
+        get: operations["search_persons_api_v1_persons_search__search__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/departments": {
         parameters: {
             query?: never;
@@ -322,10 +339,28 @@ export interface components {
             /** Role Id */
             role_id: number;
         };
+        /** DepartmentReadWithCount */
+        DepartmentReadWithCount: {
+            /** Name */
+            name: string;
+            /** Id */
+            id: number;
+            /** Role Id */
+            role_id: number;
+            /** Count */
+            count: number;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
+        };
+        /** ListResponse[PersonFullRead] */
+        ListResponse_PersonFullRead_: {
+            /** Data */
+            data: components["schemas"]["PersonFullRead"][];
+            /** Total */
+            total: number;
         };
         /** ListResponse[RoleRead] */
         ListResponse_RoleRead_: {
@@ -341,10 +376,10 @@ export interface components {
             /** Password */
             password: string;
         };
-        /** PaginatedListResponse[DepartmentRead] */
-        PaginatedListResponse_DepartmentRead_: {
+        /** PaginatedListResponse[DepartmentReadWithCount] */
+        PaginatedListResponse_DepartmentReadWithCount_: {
             /** Data */
-            data: components["schemas"]["DepartmentRead"][];
+            data: components["schemas"]["DepartmentReadWithCount"][];
             pagination: components["schemas"]["Pagination"];
         };
         /** PaginatedListResponse[PersonRead] */
@@ -397,7 +432,7 @@ export interface components {
             /** Last Name */
             last_name?: string | null;
             /** Image Url */
-            image_url: string;
+            image_url?: string | null;
             /** Department Id */
             department_id?: number | null;
         };
@@ -798,6 +833,37 @@ export interface operations {
             };
         };
     };
+    search_persons_api_v1_persons_search__search__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                search: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ListResponse_PersonFullRead_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     create_department_api_v1_departments_post: {
         parameters: {
             query?: never;
@@ -850,7 +916,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["PaginatedListResponse_DepartmentRead_"];
+                    "application/json": components["schemas"]["PaginatedListResponse_DepartmentReadWithCount_"];
                 };
             };
             /** @description Validation Error */

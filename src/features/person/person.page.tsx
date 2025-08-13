@@ -4,23 +4,22 @@ import { useParams } from "react-router-dom";
 import { usePersons } from "./model/use-persons";
 import { CustomPagination } from "../pagination";
 import { PersonTable } from "./ui/person-table";
-import { PersonForm } from "./ui/person-form";
+import { PersonCreateForm } from "./ui/person-create-form";
 
 const PersonPage = () => {
   const { departmentId } = useParams<PathParams[typeof ROUTES.PERSONS]>();
-  const { handlePageChange, page, pages, persons, totalPages } = usePersons({
-    department_id: Number(departmentId),
-  });
+  const { handlePageChange, page, pages, persons, totalPages, isLoading } =
+    usePersons({
+      department_id: Number(departmentId),
+    });
 
   return (
     <PageLayout
       title="Персонал"
-      addButton={<PersonForm />}
+      addButton={<PersonCreateForm />}
       children={
         <>
-          <PersonTable
-            data={persons}
-          />
+          <PersonTable isLoading={isLoading} data={persons} />
           <CustomPagination
             handleChange={handlePageChange}
             page={page}

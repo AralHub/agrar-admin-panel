@@ -5,7 +5,7 @@ export const usePersons = ({ department_id }: { department_id: number }) => {
   const [page, setPage] = useState(1);
   const page_size = 10;
 
-  const { persons, paginationInfo } = usePersonList({
+  const { persons, paginationInfo,isLoading } = usePersonList({
     department_id,
     page,
     page_size,
@@ -25,5 +25,6 @@ export const usePersons = ({ department_id }: { department_id: number }) => {
     handlePageChange,
     totalPages,
     page,
+    isLoading
   };
 };

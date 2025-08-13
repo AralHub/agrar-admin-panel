@@ -1,7 +1,7 @@
 import { ROUTES } from "@/shared/model/routes";
 import { Button } from "@/shared/ui/kit/button";
 import { Link, useLocation } from "react-router-dom";
-import { UserCog, UserSearch } from "lucide-react";
+import { UserCog, UserPen, UserSearch } from "lucide-react";
 import { cn } from "@/shared/lib/css";
 
 interface SidebarProps {
@@ -44,8 +44,21 @@ export function Sidebar({ className }: SidebarProps) {
             to={ROUTES.DEPARTMENT}
             className="flex justify-center lg:justify-start"
           >
-            <UserSearch className="h-10 w-10 lg:mr-2" />
+            <UserPen className="h-10 w-10 lg:mr-2" />
             <span>Департмент</span>
+          </Link>
+        </Button>
+        <Button
+          variant={currentPath === ROUTES.PERSONS_SEARCH ? "secondary" : "ghost"}
+          className="w-full lg:justify-start"
+          asChild
+        >
+          <Link
+            to={ROUTES.PERSONS_SEARCH}
+            className="flex justify-center lg:justify-start"
+          >
+            <UserSearch className="h-10 w-10 lg:mr-2" />
+            <span>Поиск</span>
           </Link>
         </Button>
       </div>

@@ -43,6 +43,10 @@ export const router = createBrowserRouter([
                 path: ROUTES.PERSON,
                 lazy: () => import("@/features/person/person-info.page"),
               },
+              {
+                path: ROUTES.PERSONS_SEARCH,
+                lazy: () => import("@/features/search/search.page"),
+              },
             ],
           },
         ],
