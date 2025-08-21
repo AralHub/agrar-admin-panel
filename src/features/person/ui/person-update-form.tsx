@@ -37,7 +37,6 @@ import { ApiSchemas } from "@/shared/api/schema";
 const personSchema = z.object({
   first_name: z.string().min(1, "Имя обязательно"),
   last_name: z.string().min(1, "Фамилия обязательна"),
-  image: z.any().optional(),
   department_id: z.number().min(1, "Выберите отдел"),
   person_id: z.number().min(1, "Пользователь неизвестно"),
 });
@@ -55,7 +54,6 @@ export const PersonUpdateForm: FC<PersonUpdateForm> = ({ personInfo }) => {
       department_id: 0,
       first_name: "",
       last_name: "",
-      image: "",
     },
   });
 
@@ -66,7 +64,6 @@ export const PersonUpdateForm: FC<PersonUpdateForm> = ({ personInfo }) => {
         department_id: personInfo.department?.id,
         first_name: personInfo.first_name,
         last_name: personInfo.last_name,
-        image: personInfo.image_url,
       });
     }
   }, [personInfo, form]);
@@ -120,28 +117,6 @@ export const PersonUpdateForm: FC<PersonUpdateForm> = ({ personInfo }) => {
                   <FormLabel>Фамилия</FormLabel>
                   <FormControl>
                     <Input autoComplete={"off"} {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="image"
-              render={({ field: { onChange } }) => (
-                <FormItem className="mt-1 mb-5">
-                  <FormLabel>Фотография</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) {
-                          onChange(file);
-                        }
-                      }}
-                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

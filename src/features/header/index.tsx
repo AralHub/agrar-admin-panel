@@ -11,7 +11,7 @@ export function AppHeader() {
   return (
     <header className="fixed top-0 left-0 right-0 bg-white shadow-sm py-3 px-4 z-50 h-16">
       <div className="flex items-center justify-between h-full container mx-auto">
-        <div className="text-xl font-semibold">Agrar</div>
+        <div className="text-xl font-semibold">Agrar funct</div>
         <Button
           variant="outline"
           size="sm"
