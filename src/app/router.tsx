@@ -47,6 +47,10 @@ export const router = createBrowserRouter([
                 path: ROUTES.PERSONS_SEARCH,
                 lazy: () => import("@/features/search/search.page"),
               },
+              {
+                path: ROUTES.FEEDBACK,
+                lazy: () => import("@/features/feedback/feedback.page"),
+              },
             ],
           },
         ],

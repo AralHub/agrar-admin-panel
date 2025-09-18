@@ -242,6 +242,74 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/feedbackadd_branch": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add Branch */
+        post: operations["add_branch_api_v1_feedbackadd_branch_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/feedbackdelete_branch": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete Branch */
+        delete: operations["delete_branch_api_v1_feedbackdelete_branch_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/feedbackget_all": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get All Feedback */
+        get: operations["get_all_feedback_api_v1_feedbackget_all_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/feedback/feedbackadd_feedback": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add Feedback */
+        post: operations["add_feedback_api_v1_feedback_feedbackadd_feedback_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/roles": {
         parameters: {
             query?: never;
@@ -280,6 +348,15 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** Body_add_feedback_api_v1_feedback_feedbackadd_feedback_post */
+        Body_add_feedback_api_v1_feedback_feedbackadd_feedback_post: {
+            /** Branch Id */
+            branch_id: number;
+            /** Rating */
+            rating: number;
+            /** Smart Token */
+            smart_token: string;
+        };
         /** Body_create_person_api_v1_persons_post */
         Body_create_person_api_v1_persons_post: {
             /** First Name */
@@ -293,6 +370,30 @@ export interface components {
              * Format: binary
              */
             image: string;
+        };
+        /** BranchCreate */
+        BranchCreate: {
+            /** Name */
+            name: string;
+        };
+        /** BranchRead */
+        BranchRead: {
+            /** Name */
+            name: string;
+            /** Id */
+            id: number;
+            /** Rating 1 Count */
+            rating_1_count: number;
+            /** Rating 2 Count */
+            rating_2_count: number;
+            /** Rating 3 Count */
+            rating_3_count: number;
+            /** Rating 4 Count */
+            rating_4_count: number;
+            /** Rating 5 Count */
+            rating_5_count: number;
+            /** Rating */
+            rating: number;
         };
         /** DataResponse[DepartmentRead] */
         DataResponse_DepartmentRead_: {
@@ -354,6 +455,13 @@ export interface components {
         HTTPValidationError: {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
+        };
+        /** ListResponse[BranchRead] */
+        ListResponse_BranchRead_: {
+            /** Data */
+            data: components["schemas"]["BranchRead"][];
+            /** Total */
+            total: number;
         };
         /** ListResponse[PersonFullRead] */
         ListResponse_PersonFullRead_: {
@@ -431,8 +539,6 @@ export interface components {
             first_name?: string | null;
             /** Last Name */
             last_name?: string | null;
-            /** Image Url */
-            image_url?: string | null;
             /** Department Id */
             department_id?: number | null;
         };
@@ -917,6 +1023,123 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PaginatedListResponse_DepartmentReadWithCount_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_branch_api_v1_feedbackadd_branch_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BranchCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_branch_api_v1_feedbackdelete_branch_delete: {
+        parameters: {
+            query: {
+                branch_id: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_all_feedback_api_v1_feedbackget_all_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ListResponse_BranchRead_"];
+                };
+            };
+        };
+    };
+    add_feedback_api_v1_feedback_feedbackadd_feedback_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/x-www-form-urlencoded": components["schemas"]["Body_add_feedback_api_v1_feedback_feedbackadd_feedback_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
                 };
             };
             /** @description Validation Error */

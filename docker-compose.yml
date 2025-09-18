@@ -1,0 +1,11 @@
+services:
+  react-app:
+    build: .
+    container_name: react-dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app    
+      - ./node_modules:/app/node_modules 
+    environment:
+      - HOST=0.0.0.0

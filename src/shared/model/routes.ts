@@ -7,6 +7,7 @@ export const ROUTES = {
   PERSONS: "/department/:departmentId",
   PERSON: "/department/:departmentId/:personId",
   LOGIN: "/login",
+  FEEDBACK: "/feedback",
 } as const;
 
 export type PathParams = {
