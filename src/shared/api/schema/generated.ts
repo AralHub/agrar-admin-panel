@@ -225,6 +225,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/departments/update/{department_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Update Department */
+        put: operations["update_department_api_v1_departments_update__department_id__put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/departments/get_all": {
         parameters: {
             query?: never;
@@ -424,12 +441,26 @@ export interface components {
             /** Data */
             data: number;
         };
+        /** DataResponse[str] */
+        DataResponse_str_: {
+            /** Data */
+            data: string;
+        };
         /** DepartmentCreate */
         DepartmentCreate: {
             /** Name */
             name: string;
             /** Role Id */
             role_id: number;
+        };
+        /** DepartmentFilter */
+        DepartmentFilter: {
+            /** Name */
+            name?: string | null;
+            /** Id */
+            id?: number | null;
+            /** Role Id */
+            role_id?: number | null;
         };
         /** DepartmentRead */
         DepartmentRead: {
@@ -990,6 +1021,41 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["DataResponse_DepartmentRead_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_department_api_v1_departments_update__department_id__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                department_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DepartmentFilter"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DataResponse_str_"];
                 };
             };
             /** @description Validation Error */
