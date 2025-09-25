@@ -82,7 +82,7 @@ export const useSession = createGStore(() => {
     }
 
     return token;
-  };  
+  };
 
-  return { refreshTokenHandle, login, logout, isAuth };
+  return { refreshTokenHandle, login, logout, isAuth, token };
 });

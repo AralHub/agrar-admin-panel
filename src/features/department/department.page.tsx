@@ -18,7 +18,7 @@ const Department = () => {
     role_id,
     totalPages,
     roles,
-    isLoading: dataLoading
+    isLoading: dataLoading,
   } = useDepartment();
 
   const { link, isReady, showNotification, triggerDownload, isLoading } =
@@ -51,7 +51,7 @@ const Department = () => {
 
             {showNotification && !isReady && (
               <div className="text-sm text-muted-foreground">
-                Файл будет доступен для скачивания через 5 минут...
+                Файл будет доступен для скачивания через 3 минуты...
               </div>
             )}
           </div>
@@ -66,7 +66,7 @@ const Department = () => {
       }
       children={
         <>
-          <DepartmentTable data={departments} isLoading={dataLoading}/>
+          <DepartmentTable data={departments} isLoading={dataLoading} />
           <CustomPagination
             handleChange={handlePageChange}
             page={page}
